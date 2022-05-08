@@ -30,7 +30,7 @@ def search_for_posts(key_word):
     all_posts=get_all_posts()
     posts_lists=[]
     for post in all_posts:
-        if key_word.lower() in post['content'].lower():
+        if key_word in post['content']:
             posts_lists.append(post)
     return posts_lists
 

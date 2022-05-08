@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template,request
 from utils import *
 
 app = Flask(__name__)
@@ -19,8 +19,8 @@ def post_page(post_pk):
 
 @app.route('/search/')
 def search_page():
-    search_by = request.args['s']
-    posts=get_post_by_username(search_by)
+    search_by = request.args.get('s')
+    posts=search_for_posts(search_by)
 
     return render_template('search.html',posts=posts,search_by=search_by)
 
