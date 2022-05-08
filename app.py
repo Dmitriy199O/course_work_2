@@ -4,17 +4,26 @@ from utils import *
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def main_page():
     posts = get_all_posts()
     return render_template('index.html', posts=posts)
 
 
-@app.route('/posts/<postid>/')
-def comments_by_id(postid):
-    get_comms = get_comments_by_post_id()
+@app.route('/posts/<int:post_pk>/')
+def post_page(post_pk):
+    post = get_post_by_pk(post_pk)
+    comments = get_comments_by_post_id(post_pk)
+    return render_template('post.html', post=post, comments=comments)
 
-    return render_template('post.html')
+
+@app.route('/search/')
+def search_page():
+    search_by = request.args['s']
+    posts=get_post_by_username(search_by)
+
+    return render_template('search.html',posts=posts,search_by=search_by)
 
 
-app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
