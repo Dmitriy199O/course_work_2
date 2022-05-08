@@ -46,3 +46,4 @@ def get_post_by_pk(pk):
 
 
 
+print(search_for_posts('еда'))

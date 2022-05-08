@@ -21,7 +21,6 @@ def post_page(post_pk):
 def search_page():
     search_by = request.args.get('s')
     posts=search_for_posts(search_by)
-
     return render_template('search.html',posts=posts,search_by=search_by)
 
 
