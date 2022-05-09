@@ -8,12 +8,17 @@ def get_all_posts():
 
 
 def get_post_by_username(username):
-    all_posts=get_all_posts()
+    all_posts = get_all_posts()
+    posts=[]
+
     for item in all_posts:
-        if username.lower() in item['poster_name']:
-            return item['poster_name'],item['poster_avatar'],item['pic'],item['content'],item['pk']
-    else:
-        return f'There is no user named {username}'
+        if username.lower() == item['poster_name'].lower():
+            item['comments']=get_comments_by_post_id(item['pk'])
+            item['comments_count']=len(item['comments'])
+            posts.append(item)
+    return posts
+
+
 
 
 def get_comments_by_post_id(post_id):
@@ -27,23 +32,23 @@ def get_comments_by_post_id(post_id):
 
 
 def search_for_posts(key_word):
-    all_posts=get_all_posts()
-    posts_lists=[]
+    all_posts = get_all_posts()
+    posts_lists = []
     for post in all_posts:
         if key_word in post['content']:
             posts_lists.append(post)
     return posts_lists
 
 
-
 def get_post_by_pk(pk):
-    all_posts=get_all_posts()
-    posts_list=[]
+    all_posts = get_all_posts()
+    posts_list = []
     for post in all_posts:
         if pk == post['pk']:
+            post['comments'] = get_comments_by_post_id(post['pk'])
+            post['comments_count'] = len(post['comments'])
             posts_list.append(post)
     return posts_list
 
 
-
-print(search_for_posts('еда'))
+print(get_post_by_pk(1))
