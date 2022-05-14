@@ -2,12 +2,26 @@ import json
 
 
 class PostsDao:
+
     def get_all_posts(self):
+
+        """
+        Открываем файл и получаем из него данные
+        :return:   list
+        """
+
         with open('data.json', 'r', encoding='utf-8') as f:
             all_posts = json.load(f)
             return all_posts
 
     def get_post_by_username(self, username):
+
+        """
+        Получаем список постов по имени пользователя
+        :param username:
+        :return: list
+        """
+
         all_posts = self.get_all_posts()
         posts = []
 
@@ -19,6 +33,13 @@ class PostsDao:
         return posts
 
     def get_comments_by_post_id(self, post_id):
+
+        """
+        Получаем список комментов по идентификатору
+        :param post_id:
+        :return: list
+        """
+
         with open('comments.json', 'r', encoding='utf-8') as f:
             all_comments = json.load(f)
             all_comments_by_id = []
@@ -28,6 +49,13 @@ class PostsDao:
             return all_comments_by_id
 
     def search_for_posts(self, key_word):
+
+        """
+        Ищем посты ,содержащие ключевое слово
+        :param key_word:
+        :return: list
+        """
+
         all_posts = self.get_all_posts()
         posts_lists = []
         for post in all_posts:
@@ -36,6 +64,13 @@ class PostsDao:
         return posts_lists
 
     def get_post_by_pk(self, pk):
+
+        """
+        Получаем посты по идентификатору
+        :param pk:
+        :return: list
+        """
+
         all_posts = self.get_all_posts()
         posts_list = []
         for post in all_posts:
@@ -45,7 +80,4 @@ class PostsDao:
                 posts_list.append(post)
         return posts_list
 
-dao=PostsDao()
-print(isinstance(dao.get_comments_by_post_id(2)[0],str))
-print(isinstance(dao.search_for_posts("ага"), list))
-print(dao.search_for_posts("кот"))
+

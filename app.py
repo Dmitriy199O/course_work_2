@@ -43,5 +43,6 @@ def post_json(post_id):
     post = posts_dao.get_post_by_pk(post_id)
     return jsonify(post)
 
+if __name__=="__main__":
 
-app.run(debug=True)
+    app.run(debug=True)
