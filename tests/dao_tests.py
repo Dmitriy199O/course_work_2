@@ -10,9 +10,9 @@ import app
 class TestPostsDao:
 
     def test_get_all_posts(self):
-        dao_all = dao.get_all_posts()
-        assert isinstance(dao_all, list) == True
-        assert isinstance(dao_all[0], dict) == True
+        dao.get_all_posts()
+        assert isinstance(dao.get_all_posts(), list) == True
+        assert isinstance(dao.get_all_posts(), dict) == True
 
     def test_get_post_by_username(self, username='hank'):
         dao.get_post_by_username(username)
