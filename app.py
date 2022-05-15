@@ -22,7 +22,7 @@ def post_page(post_pk):
 @app.route('/search/')
 def search_page():
     search_by = request.args.get('s')
-    posts = posts_dao.search_for_posts(search_by)
+    posts = posts_dao.search_for_posts(search_by)[:10]
     return render_template('search.html', posts=posts, search_by=search_by)
 
 
