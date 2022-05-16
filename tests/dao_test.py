@@ -76,7 +76,7 @@ class TestPostsDao:
     def test_get_post_by_pk(sel, pk='2'):
         dao.get_post_by_pk(pk)
         assert isinstance(dao.get_post_by_pk(pk), list) == True, 'not list'
-        assert isinstance(dao.get_post_by_pk(pk), dict) == True, 'not dict'
+        assert isinstance(dao.get_post_by_pk(pk)[0], dict) == True, 'not dict'
         assert dao.get_post_by_pk(pk)[0]['poster_name']
         assert dao.get_post_by_pk(pk)[0]['poster_avatar']
         assert dao.get_post_by_pk(pk)[0]['pic']
@@ -121,7 +121,7 @@ class TestAPI:
 
     def test_api_get_one_post_is_dict(self):
         response = app.app.test_client().get('/api/posts/1/')
-        assert type(response.json) == dict, f' {response} is not dict'
+        assert type(response.json) == list, f' {response} is not list'
 
     def test_api_get_one_post_valid_keys(self):
         valid_keys = {'poster_name', 'poster_avatar', 'pic', 'content', 'views_count', 'likes_count', 'pk'}
