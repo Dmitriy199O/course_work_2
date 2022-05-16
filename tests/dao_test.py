@@ -46,7 +46,7 @@ class TestPostsDao:
         assert dao.get_post_by_username(username)[0]['comments']
         assert dao.get_post_by_username(username)[0]['comments_count']
 
-    def test_get_comments_by_post_id(self, uid='1'):
+    def test_get_comments_by_post_id(self, uid=1):
         """
          Проверяем ,что метод возвращает список словарей
         :param uid:
@@ -73,7 +73,7 @@ class TestPostsDao:
         assert dao.search_for_posts(keyword)[0]['views_count']
         assert dao.search_for_posts(keyword)[0]['likes_count']
 
-    def test_get_post_by_pk(sel, pk='2'):
+    def test_get_post_by_pk(sel, pk=2):
         dao.get_post_by_pk(pk)
         assert isinstance(dao.get_post_by_pk(pk), list) == True, 'not list'
         assert isinstance(dao.get_post_by_pk(pk)[0], dict) == True, 'not dict'
@@ -124,9 +124,10 @@ class TestAPI:
         assert type(response.json) == list, f' {response} is not list'
 
     def test_api_get_one_post_valid_keys(self):
-        valid_keys = {'poster_name', 'poster_avatar', 'pic', 'content', 'views_count', 'likes_count', 'pk'}
+        valid_keys = {'comments','comments_count','poster_name', 'poster_avatar', 'pic', 'content', 'views_count', 'likes_count', 'pk'}
         response = app.app.test_client().get('/api/posts/1/')
-        post_keys = response.json.keys()
-        post_dict = response.json
+        post_dict=response.json[0]
+        post_keys = response.json[0].keys()
+
         assert post_keys == valid_keys, f' {post_keys} are not in valid keys'
         assert post_dict['pic'] != None, 'there is  no pic'
