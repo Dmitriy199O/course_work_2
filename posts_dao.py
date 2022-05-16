@@ -80,4 +80,5 @@ class PostsDao:
                 posts_list.append(post)
         return posts_list
 
-
+dao=PostsDao()
+print(dao.get_post_by_pk(2)[0])
